@@ -1,0 +1,28 @@
+<form ng-submit="addPost()">
+  <h3>Add a new post</h3>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>
+
+<!-- order using orderBy. brilliant -->
+<div style = "margin: 10px" ng-repeat="post in posts |  orderBy:'-upvotes'">
+
+  <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+  {{post.upvotes}}
+<!-- ng-show and hide accept true or false. posts with a link will return true and be shown with their href-->
+  <a ng-show="post.link" href="{{post.link}}">
+    {{post.title}}
+  </a>
+<!-- posts with no link will return false, and `false` on `hide` will show. could also do ng-show = "!post.link" -->
+  <span ng-hide="post.link">
+    {{post.title}}
+  </span>
+
+  <br>
+  <a href = "/#/posts/{{post.id}}"> Comment</a>
+</div>

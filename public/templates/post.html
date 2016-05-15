@@ -1,0 +1,29 @@
+<!-- the reason this page knows which controller it is bound to is because in app.js when we create this route we pass it a 'controller' parameter with the value of 'PostsCtrl'  -->
+<div class="page-header">
+  <a href="/#/home">back</a>
+
+  <h2>
+    <a ng-show="post.link" href="{post.link}">{{post.title}}</a>
+    <span ng-hide="post.link">{{post.title}}</span>
+  </h2>
+
+</div>
+
+<form ng-submit="addComment()">
+  	<div class="form-group">
+    	<input type="text" class="form-control" placeholder="New Comment" ng-model="text"></input>
+		<input type="text" class="form-control" placeholder="Username" ng-model="user"></input>
+  	</div>
+  	<button type="submit" class="btn btn-primary">Post</button>
+</form>
+  
+<h3>Comments</h3>
+<hr>
+<div style = "margin: 35px" ng-repeat="comment in post.comments |  orderBy:'-upvotes'">
+
+	<div style = "font-size: 18px">{{comment.text}}</div>
+	<div ng-show = "comment.user" style = "font-size: 12px">-{{comment.user}}</div>
+	<div ng-show = "!comment.user" style = "font-size: 12px">-Anonymous</div>
+
+	<hr>
+</div>
