@@ -4,6 +4,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 	$stateProvider
 	.state('home',{
+		resolve:{
+			promise: function(posts){
+				return posts.getAll();
+			}
+		},
 		url: '/home',
 		/*must pass a controller to the new route or it won't load properly*/
 		controller: 'MainCtrl',

@@ -1,12 +1,17 @@
 //creating this service so that both mainCtrl and postsCtrl have access to the data
-app.factory('posts', [function(){
-  
-  var posts = [
-  {id:0,title:"the post",upvotes: 1, 
-  	comments: [{user:"Stacey",text:"lol"}, {user:"Jona",text:"i don't understand"}]}, 
-  {id:1,title: "the link", upvotes: 2, 
-  	comments: [{user:"Erez",text:"goddamn troll"}, {user:"Sasha",text:"rick rolled!!"}], link: "www.google.com"}
-  ];
+//inject $http to get posts from server (which brings it from db)
+app.factory('posts', ['$http', function($http){
 
-  return posts;
+  var postService = {
+	posts: [],
+ 		
+	getAll: function(){
+		//'/posts' is the get address from index.js
+		return $http.get('/posts').then(function(data){
+			angular.copy(data.data, postService.posts);
+		})
+	}
+  }
+
+  return postService;
 }]);

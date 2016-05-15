@@ -13,7 +13,7 @@ app.controller('PostsCtrl', ['$scope', 'posts', '$stateParams',function($scope, 
 		//the 'comment' button sends the user to the url /#posts/post.id 
 		//<- this id guarantees that the post clicked matches its position in the array
 		//remember that visually they are sorted by 'orderBy', which is only visual and doesn't affect the position of the posts in the array
-	$scope.post = posts[$stateParams.index];
+	$scope.post = posts.posts[$stateParams.index];
 	console.log("$scope post is ", $scope.post);
 	$scope.addComment = function(){
 		$scope.post.comments.push({user: $scope.user, text: $scope.text})
